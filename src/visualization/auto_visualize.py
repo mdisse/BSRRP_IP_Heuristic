@@ -1,5 +1,5 @@
 """
-Automatic Visualization Module for BRR Results
+Automatic Visualization Module for BSRRP Results
 
 This module provides automatic visualization capabilities for both optimization
 and heuristic results using multiprocessing for efficiency.
@@ -76,7 +76,7 @@ def visualize_result_async(result_file: str, overwrite: bool = True,
     
     # Get script directory (going up two levels from src/visualization/ to root)
     script_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-    timestep_script = os.path.join(script_dir, 'visualize_BRR_steps.py')
+    timestep_script = os.path.join(script_dir, 'visualize_BSRRP_steps.py')
     astar_script = os.path.join(script_dir, 'visualize_astar_moves.py')
     
     # Check if scripts exist
@@ -255,7 +255,7 @@ def visualize_gurobi_result(result_file: str, background: bool = True) -> Option
 # Example usage functions
 if __name__ == "__main__":
     # Example: Auto-visualize a single file
-    # auto_visualize("experiments/resultsBRR/some_result.json")
+    # auto_visualize("experiments/resultsBSRRP/some_result.json")
     
     # Example: Batch visualize multiple files
     # result_files = ["file1.json", "file2.json", "file3.json"]

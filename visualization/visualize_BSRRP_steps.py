@@ -888,7 +888,7 @@ def plot_warehouse_to_ax(ax, time_step, amr_positions, ul_positions,
 if all_experiments:
     number = 0
     processed_files = set()
-    results_file_path = os.path.join(os.path.dirname(__file__), 'experiments/hashesBRR/results.txt')
+    results_file_path = os.path.join(os.path.dirname(__file__), 'experiments/hashesBSRRP/results.txt')
     with open(results_file_path, 'r') as results_file:
         for line in results_file:
             try:

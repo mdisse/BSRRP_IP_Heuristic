@@ -8,7 +8,7 @@ class StaticModel:
     def __init__(self, instance: Instance, verbose=False) -> None:
         self.instance = instance
         self.verbose = verbose
-        self.model = gp.Model("BRR_Static")
+        self.model = gp.Model("BSRRP_Static")
         self.Unit_loads = self.instance.unit_loads
         self.T = self._calculate_max_T() + 1
         self.Lanes = self.instance.get_buffer().get_virtual_lanes()[1:]      # Exclude the source lane

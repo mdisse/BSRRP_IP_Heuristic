@@ -9,7 +9,7 @@ import matplotlib.patches as patches
 import numpy as np
 from src.instance.instance_loader import InstanceLoader
 from src.instance.instance import Instance
-from src.test_cases.test_case_brr import TestCaseBrr
+from src.test_cases.test_case_bsrrp import TestCaseBsrrp
 from src.test_cases.writer_functions import generate_heuristic_result_path
 from src.heuristics.map_tw_prio import create_task_queue 
 from src.visualization.auto_visualize import auto_visualize 
@@ -21,8 +21,8 @@ def find_solved_gurobi_instances(experiments_dir="experiments"):
     """
     solved_instances = []
     
-    # Look for result files in resultsBRR directory
-    results_pattern = os.path.join(experiments_dir, "resultsBRR", "**", "*.json")
+    # Look for result files in resultsBSRRP directory
+    results_pattern = os.path.join(experiments_dir, "resultsBSRRP", "**", "*.json")
     result_files = glob.glob(results_pattern, recursive=True)
     
     for result_file in result_files:
@@ -31,8 +31,8 @@ def find_solved_gurobi_instances(experiments_dir="experiments"):
             continue
             
         # Convert result path to corresponding instance path
-        # Simply replace 'resultsBRR' with 'inputsBRR' - both have fleet_size directories
-        instance_file = result_file.replace('resultsBRR', 'inputsBRR')
+        # Simply replace 'resultsBSRRP' with 'inputsBSRRP' - both have fleet_size directories
+        instance_file = result_file.replace('resultsBSRRP', 'inputsBSRRP')
         
         # Check if the instance file exists
         if os.path.exists(instance_file):
@@ -78,7 +78,7 @@ def find_instances_without_heuristic_results(experiments_dir="experiments"):
 
 def solve_instance(instance, verbose, instance_file_path, gurobi_result_path=None, astar_time_limit=None, vrp_time_limit=None, enable_visualization=True, vrp_solver='scheduling', overwrite=False, **kwargs): 
     """
-    Solve the given instance using the BRR heuristic with optional comparison.
+    Solve the given instance using the BSRRP heuristic with optional comparison.
     """
     # Check if result checks existence (if overwrite is False)
     if not overwrite:
@@ -160,7 +160,7 @@ def solve_instance(instance, verbose, instance_file_path, gurobi_result_path=Non
                         solution[decision_info['decision']] = 1
             
             # Create validation instance
-            val_test_case = TestCaseBrr(instance=instance, variant="dynamic_multiple", solution=solution, verbose=verbose, mode="validate_gap")
+            val_test_case = TestCaseBsrrp(instance=instance, variant="dynamic_multiple", solution=solution, verbose=verbose, mode="validate_gap")
             
             # Calculate gap
             true_gap = val_test_case.calculate_gurobi_gap()
@@ -532,8 +532,8 @@ def find_gurobi_result_file(instance_path, fleet_size_override=None):
         Path to the corresponding Gurobi result file or None if not found
     """
     # Convert instance path to result path using the same pattern as heuristic results
-    # Replace 'inputsBRR' with 'resultsBRR' (same as heuristic but without _heuristic suffix)
-    if 'inputsBRR' in instance_path:
+    # Replace 'inputsBSRRP' with 'resultsBSRRP' (same as heuristic but without _heuristic suffix)
+    if 'inputsBSRRP' in instance_path:
         # Use override fleet size if provided, otherwise read from instance
         if fleet_size_override is not None:
             fleet_size = fleet_size_override
@@ -545,8 +545,8 @@ def find_gurobi_result_file(instance_path, fleet_size_override=None):
             except:
                 fleet_size = 1
         
-        # Replace inputsBRR with resultsBRR
-        result_path = instance_path.replace('inputsBRR', 'resultsBRR')
+        # Replace inputsBSRRP with resultsBSRRP
+        result_path = instance_path.replace('inputsBSRRP', 'resultsBSRRP')
         
         # Insert fleet_size directory before the filename
         path_parts = result_path.split('/')
@@ -635,7 +635,7 @@ def solve_with_comparison(instance, instance_path, verbose=False, gurobi_result_
     """
     
     # Solve with heuristic
-    test_case = TestCaseBrr(instance=instance, variant="dynamic_multiple", verbose=verbose, mode="heuristic")
+    test_case = TestCaseBsrrp(instance=instance, variant="dynamic_multiple", verbose=verbose, mode="heuristic")
     
     # Start timing
     test_case.start_heuristic_timer()
@@ -760,7 +760,7 @@ def validate_heuristic_solution(instance, test_case, verbose=False):
             solution[decision] = 1
         
         # Run constraint validation with additional error handling
-        validation_test_case = TestCaseBrr(instance=instance, variant="dynamic_multiple", solution=solution, verbose=verbose, mode="check")
+        validation_test_case = TestCaseBsrrp(instance=instance, variant="dynamic_multiple", solution=solution, verbose=verbose, mode="check")
         status = validation_test_case.check_solution()
         
         if status == 2:  # Optimal/feasible
@@ -781,7 +781,7 @@ def validate_heuristic_solution(instance, test_case, verbose=False):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Solve BRR instances using heuristic approach with efficient comparison")
+    parser = argparse.ArgumentParser(description="Solve BSRRP instances using heuristic approach with efficient comparison")
     parser.add_argument("--instance", type=str, help="Path to the instance json file")
     parser.add_argument("--directory", type=str, help="Path to a directory containing instance json files")
     parser.add_argument("--auto-solve", action='store_true', help="Automatically solve all instances that have Gurobi results but no heuristic results")

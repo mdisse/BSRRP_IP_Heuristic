@@ -6,7 +6,7 @@ sys.path.append(os.path.join(wd, '../..'))
 from src.instance.instance import Instance
 from src.integer_programming.static_model import StaticModel
 from src.integer_programming.dynamic_multiple_model import DynamicMultipleModel
-from src.test_cases.writer_functions import save_resultsBrr
+from src.test_cases.writer_functions import save_resultsBsrrp
 import gurobipy as gp
 import gurobi_modelanalyzer as gma
 import re
@@ -14,9 +14,9 @@ import copy
 import time
 from src.heuristics.astar import AStarSolver
 
-class TestCaseBrr: 
+class TestCaseBsrrp: 
     """
-    This class is used to test the BRR problem
+    This class is used to test the BSRRP
     """
     def __init__(self, instance: Instance, variant="static", solution=False, verbose=False, mode="solve") -> None:
         """
@@ -276,7 +276,7 @@ class TestCaseBrr:
                     timestep += travel_time
                 decision_dict[vehicle] = vehicle_decision_dict
             self.results['decisions'] = decision_dict
-            save_resultsBrr(filename, self)
+            save_resultsBsrrp(filename, self)
             print(f"Results saved to {filename}")
         
     def check_solution(self):
@@ -857,8 +857,8 @@ class TestCaseBrr:
         import os
         from datetime import datetime
         
-        # Create the hashesBRR directory if it doesn't exist
-        tracking_dir = "experiments/hashesBRR"
+        # Create the hashesBSRRP directory if it doesn't exist
+        tracking_dir = "experiments/hashesBSRRP"
         os.makedirs(tracking_dir, exist_ok=True)
         
         # Path to the tracking file
@@ -899,5 +899,5 @@ if __name__ == "__main__":
         access_directions={"north": True, "east": True, "south": True, "west": True}, 
         exampleGenerator=UnitLoadGenerator(tw_length=15, fill_level=0.8, seed=1),
     )
-    testCase = TestCaseBrr(instance=instance)
+    testCase = TestCaseBsrrp(instance=instance)
     print(instance.get_buffer().get_virtual_lanes())

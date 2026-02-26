@@ -9,7 +9,7 @@ class DynamicMultipleModel:
         self.instance = instance
         self.verbose = verbose
         self.check_mode = check_mode
-        self.model = gp.Model("BRR_Dynamic_Multiple_AMRs")
+        self.model = gp.Model("BSRRP_Dynamic_Multiple_AMRs")
         
         # ONLY disable optimization when check_mode=True (for heuristic validation)
         # Regular solve mode still uses all optimization parameters
@@ -21,7 +21,7 @@ class DynamicMultipleModel:
             self.model.setParam('FeasibilityTol', 1e-8)
             self.model.setParam('OptimalityTol', 1e-8)
         else:
-            # Normal optimization mode (for run_BRR_experiment.py)
+            # Normal optimization mode (for run_BSRRP_experiment.py)
             self.model.setParam('TimeLimit', 3600)
             self.model.setParam('MIPGap', 0.05)
             self.model.setParam('Heuristics', 0.5)

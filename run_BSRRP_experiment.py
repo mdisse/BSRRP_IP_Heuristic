@@ -2,7 +2,7 @@ import sys
 import os
 sys.path.insert(0, os.path.abspath('./src'))
 
-### This file is used to start the experiments for the buffer reshuffling and retrieval (BRR) problem
+### This file is used to start the experiments for the buffer storage, retrieval, and reshuffling problem (BSRRP)
 
 
 import argparse
@@ -12,7 +12,7 @@ import numpy as np
 from src.instance.instance_loader import InstanceLoader
 from src.instance.instance import Instance
 from src.examples_gen.multi_robot_constructive_gen import MultiRobotConstructiveGenerator
-from src.test_cases.test_case_brr import TestCaseBrr
+from src.test_cases.test_case_bsrrp import TestCaseBsrrp
 import gurobipy as gp
 
 class PreGeneratedContent:
@@ -56,16 +56,16 @@ def create_paths(instance):
         f"speed_{speed}/" \
         f"fleet_size_{fleet_size}"
 
-    input_path = f"experiments/inputsBRR/{common_structure}/"
+    input_path = f"experiments/inputsBSRRP/{common_structure}/"
     os.makedirs(input_path, exist_ok=True)
 
-    result_path = f"experiments/resultsBRR/{common_structure}/"
+    result_path = f"experiments/resultsBSRRP/{common_structure}/"
     os.makedirs(result_path, exist_ok=True)
 
-    feasibility_path = f"experiments/feasibleBRR/{common_structure}/" # New path for feasibility
+    feasibility_path = f"experiments/feasibleBSRRP/{common_structure}/" # New path for feasibility
     os.makedirs(feasibility_path, exist_ok=True) # Create the directory
 
-    hash_path = f"experiments/hashesBRR/"
+    hash_path = f"experiments/hashesBSRRP/"
     os.makedirs(hash_path, exist_ok=True)
 
     return input_path, result_path, hash_path, feasibility_path # Return the new path
@@ -260,7 +260,7 @@ def solve_instance(instance, input_path, result_path, hash_path, feasibility_pat
         print("Solving instance: ", instance)
         feasibility_status = {} # Initialize feasibility status dict
         try:
-            test_case = TestCaseBrr(instance=instance, variant="dynamic_multiple", verbose=verbose, mode="solve")
+            test_case = TestCaseBsrrp(instance=instance, variant="dynamic_multiple", verbose=verbose, mode="solve")
             is_feasible = test_case.feasible # Store feasibility
             feasibility_status = {'feasible': is_feasible} # Set status
 
@@ -309,7 +309,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--instance", type=str, help="Path to the instance json file")
     parser.add_argument("--verbose", action="store_true", help="Prints the results of the model")
-    parser.add_argument("--check-existing", action="store_true", help="Check existing instances in inputsBRR instead of generating new ones") 
+    parser.add_argument("--check-existing", action="store_true", help="Check existing instances in inputsBSRRP instead of generating new ones") 
     parser.add_argument("--generate-only", action="store_true", default=False, help="Generate new instances without solving them")
     parser.add_argument("--force-resolve", action="store_true", default=False, help="Force re-solving even if result files already exist")
     args = parser.parse_args()
@@ -343,7 +343,7 @@ if __name__ == "__main__":
         # Decide whether to generate or load based on the flag
         if args.check_existing:
             instances_to_process = []
-            base_input_path = "experiments/inputsBRR"
+            base_input_path = "experiments/inputsBSRRP"
             print(f"Checking existing instances flag set. Scanning {base_input_path}...")
             if not os.path.isdir(base_input_path):
                 print(f"Error: Directory {base_input_path} not found.")

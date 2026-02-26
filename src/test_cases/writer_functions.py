@@ -8,7 +8,7 @@ import re
 from math import ceil
 
 
-def save_resultsBrr(filename: str, test_case):
+def save_resultsBsrrp(filename: str, test_case):
     """
     Saves the results of the Gurobi experiment as a json file.
     """
@@ -209,7 +209,7 @@ def save_heuristic_results(filename: str, test_case, validate=True):
 def generate_heuristic_result_path(instance_file_path: str, fleet_size_override=None) -> str:
     """
     Generate the heuristic result file path based on the instance file path.
-    Converts from inputsBRR to resultsBRR and appends _heuristic suffix.
+    Converts from inputsBSRRP to resultsBSRRP and appends _heuristic suffix.
     Also adds fleet_size directory based on the instance data or override.
     """
     if fleet_size_override is not None:
@@ -222,7 +222,7 @@ def generate_heuristic_result_path(instance_file_path: str, fleet_size_override=
         except:
             fleet_size = 1
     
-    result_path = instance_file_path.replace('inputsBRR', 'resultsBRR')
+    result_path = instance_file_path.replace('inputsBSRRP', 'resultsBSRRP')
     
     path_parts = result_path.split('/')
     filename = path_parts[-1]
@@ -249,7 +249,7 @@ def generate_heuristic_result_path(instance_file_path: str, fleet_size_override=
 def generate_heuristic_filename(instance_file_path: str, fleet_size_override=None) -> str:
     """
     Generate the heuristic result filename based on the instance file path.
-    Converts from inputsBRR to resultsBRR and appends _heuristic suffix.
+    Converts from inputsBSRRP to resultsBSRRP and appends _heuristic suffix.
     Also adds fleet_size directory based on the instance data or override.
     """
     if fleet_size_override is not None:
@@ -262,7 +262,7 @@ def generate_heuristic_filename(instance_file_path: str, fleet_size_override=Non
         except:
             fleet_size = 1
     
-    result_path = instance_file_path.replace('inputsBRR', 'resultsBRR')
+    result_path = instance_file_path.replace('inputsBSRRP', 'resultsBSRRP')
     
     path_parts = result_path.split('/')
     filename = path_parts[-1]
@@ -652,7 +652,7 @@ def validate_heuristic_solution_detailed(instance, test_case, verbose=False):
             return False, -1, {"message": "No solution to validate", "violations": []}
         
         # Import here to avoid circular imports
-        from src.test_cases.test_case_brr import TestCaseBrr
+        from src.test_cases.test_case_bsrrp import TestCaseBsrrp
         
         # Extract the decisions from the test case
         translated_decisions = translate_heuristic_decisions_simple(test_case.amr_assignments, test_case.instance)
@@ -721,7 +721,8 @@ def validate_heuristic_solution_detailed(instance, test_case, verbose=False):
         
         # Run constraint validation with verbose output to capture violations
         try:
-            validation_test_case = TestCaseBrr(instance=instance, variant="dynamic_multiple", solution=solution, verbose=verbose, mode="check")
+            from src.test_cases.test_case_bsrrp import TestCaseBsrrp
+            validation_test_case = TestCaseBsrrp(instance=instance, variant="dynamic_multiple", solution=solution, verbose=verbose, mode="check")
             
             # Capture the validation status
             status = validation_test_case.check_solution()

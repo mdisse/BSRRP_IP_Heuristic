@@ -22,7 +22,7 @@ def ap_id_to_coords(ap_id, slot, data):
     
     for ap in data['access_points']:
         if ap['ap_id'] == ap_id:
-            # Note: Logic copied from visualize_BRR_steps.py
+            # Note: Logic copied from visualize_BSRRP_steps.py
             if ap['direction'] == 'north':
                 return ap['global_x'], ap['global_y'] + 1 + vl_length - slot
             elif ap['direction'] == 'south':
@@ -218,8 +218,8 @@ def main():
         # Infer instance_type and ul_config from path if possible
         path_parts = args.file.split(os.sep)
         instance_type = "single_files"
-        if "resultsBRR" in path_parts:
-            idx = path_parts.index("resultsBRR")
+        if "resultsBSRRP" in path_parts:
+            idx = path_parts.index("resultsBSRRP")
             if idx + 1 < len(path_parts):
                 instance_type = path_parts[idx+1]
         
@@ -233,7 +233,7 @@ def main():
             print("Error: Either --instance-type or --file must be provided.")
             return
 
-        base_dir = f'experiments/resultsBRR/{args.instance_type}'
+        base_dir = f'experiments/resultsBSRRP/{args.instance_type}'
         
         if not os.path.exists(base_dir):
             print(f"Directory not found: {base_dir}")

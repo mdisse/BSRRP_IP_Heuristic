@@ -21,7 +21,7 @@ class Instance():
     This class is able to describe instances that work with a max priority class and 
     with unit loads that have to be retrieved within a time window.
     To differentiate between the two, the max_p variable is used. If max_p is set to 0, 
-    the instance is assumed to be a BRR instance with time windows,
+    the instance is assumed to be a BSRRP instance with time windows,
     otherwise it is assumed to be a CP instance with a max priority class.
     """
     def __init__(self, 
