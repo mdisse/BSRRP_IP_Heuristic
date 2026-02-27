@@ -3,7 +3,7 @@
 This repository addresses the Buffer Storage, Retrieval, and Reshuffling Problem (BSRRP). It implements a Mixed Integer Programming (MIP) model for exact solutions and a scalable heuristic approach designed for larger-scale automated warehouse operations.
 
 <div align="center">
-  <video src="https://github.com/user-attachments/assets/b061a7a6-739f-4406-ac39-003fa7fd667a" width="100%" controls autoplay loop muted></video>
+  <video src="https://github.com/user-attachments/assets/1f2628e3-feb2-405f-9bdc-1b153ffb3b0c" width="100%" controls autoplay loop muted></video>
   <br>
   <em>Visualization of the Dynamic Buffer Storage, Retrieval, and Reshuffling Problem (BSRRP) with multiple Autonomous Mobile Robots.  </em>
 </div>
@@ -16,10 +16,6 @@ This repository addresses the Buffer Storage, Retrieval, and Reshuffling Problem
 
 ### Installation
 ```bash
-# Clone the repository
-git clone https://github.com/yourusername/buffer_reshuffling_and_retrieval_ip.git
-cd buffer_reshuffling_and_retrieval_ip
-
 # Install as a package (recommended for use as a submodule)
 pip install -e .
 
