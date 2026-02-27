@@ -3,12 +3,10 @@
 This repository addresses the Buffer Storage, Retrieval, and Reshuffling Problem (BSRRP). It implements a Mixed Integer Programming (MIP) model for exact solutions and a scalable heuristic approach designed for larger-scale automated warehouse operations.
 
 <div align="center">
-  <video src="https://github.com/user-attachments/assets/c28fd613-cb21-4f2a-8509-ba2d8647413a" width="100%" controls autoplay loop muted></video>
+  <video src="https://github.com/user-attachments/assets/b061a7a6-739f-4406-ac39-003fa7fd667a" width="100%" controls autoplay loop muted></video>
   <br>
   <em>Visualization of the Dynamic Buffer Storage, Retrieval, and Reshuffling Problem (BSRRP) with multiple Autonomous Mobile Robots.  </em>
 </div>
-
-**Note on Visualization & Kinematic Assumptions:** The AMR driving trajectories shown in the video above are simplified for visualization purposes. As detailed in our paper, the optimization model operates under specific kinematic abstractions (e.g., constant velocity, negligible acceleration/deceleration phases). The visualization does not reflect continuous, high-fidelity kinematic constraints. For real-world deployment, we assume that the AMRs are equipped with onboard safety sensors (e.g., LIDAR) and that a dedicated, lower-level fleet management system handles continuous path smoothing and physical collision avoidance. This abstraction allows our models to focus entirely on solving the complex logical coordination, deadlock prevention, and temporal synchronization of the fleet.
 
 ## Optimization Methods
 
