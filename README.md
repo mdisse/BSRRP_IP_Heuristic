@@ -3,7 +3,7 @@
 This repository addresses the Buffer Storage, Retrieval, and Reshuffling Problem (BSRRP). It implements a Mixed Integer Programming (MIP) model for exact solutions and a scalable heuristic approach designed for larger-scale automated warehouse operations.
 
 <div align="center">
-  <video src="https://github.com/user-attachments/assets/1f2628e3-feb2-405f-9bdc-1b153ffb3b0c" width="100%" controls autoplay loop muted></video>
+  <video src="https://github.com/user-attachments/assets/ad030e7a-47ce-4a87-a2b1-76a5db733046" width="100%" controls autoplay loop muted></video>
   <br>
   <em>Visualization of the Dynamic Buffer Storage, Retrieval, and Reshuffling Problem (BSRRP) with multiple Autonomous Mobile Robots.  </em>
 </div>
