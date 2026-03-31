@@ -57,7 +57,7 @@ The system tackles the problem using two distinct approaches:
 
 #### 1. Exact Formulation (MIP)
 Uses **Gurobi** to solve a Mixed Integer Programming model. This approach guarantees optimal solutions but is limited to smaller instances due to computational complexity.
-- **Source**: `src/integer_programming/`
+- **Source**: `src/bsrrp/integer_programming/`
 
 #### 2. Heuristic Solver
 Designed for large-scale instances. The heuristic pipeline consists of four intermediate steps:
@@ -65,7 +65,7 @@ Designed for large-scale instances. The heuristic pipeline consists of four inte
 2.  **A\* Search**: Determines the optimal logical sequence of moves (storage, retrieval, reshuffling) required to fulfill the tasks.
 3.  **Scheduling**: Assigns these moves to available vehicles (AMRs) using a VRP solver (OR-Tools CP-SAT), respecting time windows and precedence constraints.
 4.  **Repair Functions**: Post-processes the schedule to resolve complex vehicle interactions, collisions, or deadlocks.
-- **Source**: `src/heuristics/`
+- **Source**: `src/bsrrp/heuristics/`
 
 ### Key Features
 
@@ -120,7 +120,7 @@ This repository provides complementary visualization scripts plus automatic visu
 
 #### Automatic Visualization System
 
-The `src.visualization.auto_visualize` module provides automatic, multiprocessing-enabled visualization:
+The `bsrrp.visualization.auto_visualize` module provides automatic, multiprocessing-enabled visualization:
 
 **Features:**
 - **Multiprocessing support** for concurrent visualization creation
@@ -218,11 +218,12 @@ The system organizes experiments in a structured hierarchy:
 ```
 buffer_reshuffling_and_retrieval_ip/
 ├── src/                                # Source code
-│   ├── heuristics/                     # A* search and VRP algorithms
-│   ├── integer_programming/            # Gurobi MIP models
-│   ├── instance/                       # Problem instance loaders
-│   ├── test_cases/                     # Validation functions
-│   └── visualization/                  # Auto-visualization modules
+│   └── bsrrp/                          # Root package
+│       ├── heuristics/                 # A* search and VRP algorithms
+│       ├── integer_programming/        # Gurobi MIP models
+│       ├── instance/                   # Problem instance loaders
+│       ├── test_cases/                 # Validation functions
+│       └── visualization/              # Auto-visualization modules
 ├── examples/                           # Layout generators and sample instances
 ├── experiments/
 │   ├── inputsBSRRP/                    # Instance files
@@ -242,10 +243,26 @@ buffer_reshuffling_and_retrieval_ip/
 ## 🤝 Contributing
 
 The system is designed for extensibility:
-- Add new heuristics in `src/heuristics/`
-- Extend validation in `src/test_cases/`
+- Add new heuristics in `src/bsrrp/heuristics/`
+- Extend validation in `src/bsrrp/test_cases/`
 - Create new instance generators in `examples/`
-- Enhance visualization in `src/visualization/` and `visualization/`
+- Enhance visualization in `src/bsrrp/visualization/` and `visualization/`
+
+## 📝 Citation
+
+If you use this code in your research, please cite our repository and the corresponding paper. 
+
+**Code Repository:**
+```bibtex
+@misc{disselnmeyer2025bsrrp_code,
+  author       = {Disselnmeyer, Max},
+  title        = {Buffer Storage, Retrieval, and Reshuffling Problem (BSRRP) Optimization},
+  year         = {2025},
+  publisher    = {GitHub},
+  journal      = {GitHub repository},
+  howpublished = {\url{[https://github.com/mdisse/bsrrp_ip_heuristic](https://github.com/mdisse/bsrrp_ip_heuristic)}},
+}
+```
 
 ## 📄 License
 
@@ -265,6 +282,6 @@ To use this repository as a submodule in another project:
    ```
 3. You can now import the modules in your code:
    ```python
-   from heuristics.astar import AStarSolver
-   from test_cases.test_case_bsrrp import TestCaseBsrrp
+   from bsrrp.heuristics.astar import AStarSolver
+   from bsrrp.test_cases.test_case_bsrrp import TestCaseBsrrp
    ```

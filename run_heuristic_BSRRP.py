@@ -1,3 +1,4 @@
+import sys; import os; sys.path.insert(0, os.path.abspath("./src"))
 import argparse
 import os
 import sys
@@ -7,12 +8,12 @@ import re
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 import numpy as np
-from src.instance.instance_loader import InstanceLoader
-from src.instance.instance import Instance
-from src.test_cases.test_case_bsrrp import TestCaseBsrrp
-from src.test_cases.writer_functions import generate_heuristic_result_path
-from src.heuristics.map_tw_prio import create_task_queue 
-from src.visualization.auto_visualize import auto_visualize 
+from bsrrp.instance.instance_loader import InstanceLoader
+from bsrrp.instance.instance import Instance
+from bsrrp.test_cases.test_case_bsrrp import TestCaseBsrrp
+from bsrrp.test_cases.writer_functions import generate_heuristic_result_path
+from bsrrp.heuristics.map_tw_prio import create_task_queue 
+from bsrrp.visualization.auto_visualize import auto_visualize 
 
 def find_solved_gurobi_instances(experiments_dir="experiments"):
     """
@@ -150,7 +151,7 @@ def solve_instance(instance, verbose, instance_file_path, gurobi_result_path=Non
         
         if hasattr(test_case, 'calculate_gurobi_gap'):
             # Extract the solution from the heuristic test case
-            from src.test_cases.writer_functions import translate_heuristic_decisions_simple
+            from bsrrp.test_cases.writer_functions import translate_heuristic_decisions_simple
             translated_decisions = translate_heuristic_decisions_simple(test_case.amr_assignments, test_case.instance)
             
             solution = {}
@@ -699,7 +700,7 @@ def get_validation_results_from_file(instance_file_path, fleet_size_override=Non
         Dictionary with validation results or None if not found
     """
     try:
-        from src.test_cases.writer_functions import generate_heuristic_result_path
+        from bsrrp.test_cases.writer_functions import generate_heuristic_result_path
         result_path = generate_heuristic_result_path(instance_file_path, fleet_size_override)
         
         if os.path.exists(result_path):
@@ -736,7 +737,7 @@ def validate_heuristic_solution(instance, test_case, verbose=False):
         
         # Create a solution dictionary from the test case
         # We need to extract the decisions from the test case
-        from src.test_cases.writer_functions import translate_heuristic_decisions_simple
+        from bsrrp.test_cases.writer_functions import translate_heuristic_decisions_simple
         
         translated_decisions = translate_heuristic_decisions_simple(test_case.amr_assignments, test_case.instance)
         

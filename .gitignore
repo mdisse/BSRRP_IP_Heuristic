@@ -187,3 +187,7 @@ archive/
 *.out
 test.sh
 model.lp
+
+# Evaluation & Outputs
+experiments/
+heatmaps/

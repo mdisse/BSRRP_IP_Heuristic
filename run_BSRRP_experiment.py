@@ -9,10 +9,10 @@ import argparse
 import json # Add this import
 import copy
 import numpy as np
-from src.instance.instance_loader import InstanceLoader
-from src.instance.instance import Instance
-from src.examples_gen.multi_robot_constructive_gen import MultiRobotConstructiveGenerator
-from src.test_cases.test_case_bsrrp import TestCaseBsrrp
+from bsrrp.instance.instance_loader import InstanceLoader
+from bsrrp.instance.instance import Instance
+from bsrrp.examples_gen.multi_robot_constructive_gen import MultiRobotConstructiveGenerator
+from bsrrp.test_cases.test_case_bsrrp import TestCaseBsrrp
 import gurobipy as gp
 
 class PreGeneratedContent:
@@ -75,8 +75,8 @@ def generate_instances():
     files = [
         # '8x3',
         # 'manual',
-        'manual2',
-        # 'Size_3x3_Layout_1x1_sink_source',
+        # 'manual2',
+        'Size_3x3_Layout_1x1_sink_source',
         # 'Size_4x4_Layout_1x1_sink_source',
         # 'Size_5x5_Layout_1x1_sink_source',
         # 'Size_6x6_Layout_1x1_sink_source',
@@ -98,7 +98,7 @@ def generate_instances():
         # {"north" : True, "east" : False, "south" : True, "west" : False}, 
     ]
     # seeds = [i for i in range(10)]
-    seeds = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    seeds = [0, 1, 2]
     fill_levels = [i/10 for i in range(5, 13)]
     # fill_levels = [0.1]
     # fill_levels = [0.1]
